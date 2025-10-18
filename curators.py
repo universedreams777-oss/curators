@@ -59,6 +59,12 @@ print("Бот запущен...")
 
 bot.polling(none_stop=True)
 
+from telebot import TeleBot
+
+API_TOKEN = '8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
+bot = TeleBot(API_TOKEN)
+
+# Обработчик новых сообщений в канале
 @bot.channel_post_handler(func=lambda message: message.text and message.text.lower().startswith("прошло 20 часов"))
 def delete_old_message(message):
     try:
@@ -66,3 +72,5 @@ def delete_old_message(message):
         print(f"Удалено сообщение: {message.text[:30]}...")
     except Exception as e:
         print(f"Ошибка при удалении: {e}")
+
+bot.polling(none_stop=True)
