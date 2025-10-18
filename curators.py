@@ -66,11 +66,12 @@ bot = TeleBot(API_TOKEN)
 
 # Обработчик новых сообщений в канале
 @bot.channel_post_handler(func=lambda message: message.text and message.text.lower().startswith("прошло 20 часов"))
-def delete_old_message(message):
+def delete_channel_post(message):
     try:
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
-        print(f"Удалено сообщение: {message.text[:30]}...")
+        print(f"✅ Удалено сообщение: {message.text[:30]}...")
     except Exception as e:
-        print(f"Ошибка при удалении: {e}")
+        print(f"❌ Ошибка при удалении: {e}")
 
 bot.polling(none_stop=True)
+
