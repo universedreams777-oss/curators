@@ -47,12 +47,12 @@ def handle_message(message):
     # Финальное сообщение
     final_text = (
         f"🧠🥰 Это твой ученик, проверь его пожалуйста {curator}\n\n"
-        f"🧍 Ученик: {student_name}\n"
-        f"📧 Почта: {student_email}\n"
-        f"🔗 Ссылка на ученика: {student_link}"
+        f"🧍 Ученик:* {student_name}\n\n"
+        f"📧 Почта:* {student_email}\n\n"
+        f"🔗 Ссылка на ученика:* {student_link}"
     )
 
-    bot.send_message(CHANNEL_ID, final_text)
+    bot.send_message(CHANNEL_ID, final_text, parse_mode="Markdown")
 
 # === ЗАПУСК ===
 print("Бот запущен...")
@@ -74,4 +74,5 @@ def delete_channel_post(message):
         print(f"❌ Ошибка при удалении: {e}")
 
 bot.polling(none_stop=True)
+
 
