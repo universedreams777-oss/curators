@@ -56,4 +56,13 @@ def handle_message(message):
 
 # === ЗАПУСК ===
 print("Бот запущен...")
+
 bot.polling(none_stop=True)
+
+@bot.channel_post_handler(func=lambda message: message.text and message.text.lower().startswith("прошло 20 часов"))
+def delete_old_message(message):
+    try:
+        bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+        print(f"Удалено сообщение: {message.text[:30]}...")
+    except Exception as e:
+        print(f"Ошибка при удалении: {e}")
