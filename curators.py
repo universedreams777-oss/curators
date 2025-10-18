@@ -54,11 +54,6 @@ def handle_message(message):
 
     bot.send_message(CHANNEL_ID, final_text, parse_mode="Markdown")
 
-# === ЗАПУСК ===
-print("Бот запущен...")
-
-bot.polling(none_stop=True)
-
 from telebot import TeleBot
 
 API_TOKEN = '8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
@@ -75,5 +70,9 @@ def delete_channel_post(message):
 
 bot.polling(none_stop=True)
 
+# === ЗАПУСК ===
+print("Бот запущен...")
+
+bot.polling(none_stop=True)
 
 
