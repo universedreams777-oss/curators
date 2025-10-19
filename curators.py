@@ -2,7 +2,7 @@ import telebot
 import re
 
 # === НАСТРОЙКИ ===
-API_TOKEN ='8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
+API_TOKEN = '8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
 CHANNEL_ID = -1002704063181  # ID канала (без кавычек)
 
 curators = [
@@ -44,7 +44,7 @@ def handle_message(message):
     student_email = email_match.group(1).strip() if email_match else "Не найдено"
     student_link = link_match.group(0).strip() if link_match else "Не найдено"
 
-final_text = (
+    final_text = (
         f"*🧠🥰 Твой ученик, проверь его пожалуйста {curator}*\n\n"
         f"*{student_name}*\n\n"
         f"*🔗 Ссылка на ученика:* {student_link}"
@@ -56,4 +56,3 @@ final_text = (
 # === ЗАПУСК ===
 print("Бот запущен...")
 bot.polling(none_stop=True)
-
