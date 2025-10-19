@@ -79,4 +79,14 @@ def handle_message(message):
 
 # === ЗАПУСК ===
 print("Бот запущен...")
-bot.polling(none_stop=True)
+# === ЗАПУСК ===
+import time
+
+while True:
+    try:
+        print("Бот запущен...")
+        bot.polling(none_stop=True, timeout=60, long_polling_timeout=30)
+    except Exception as e:
+        print(f"⚠️ Ошибка: {e}")
+        time.sleep(5)
+
