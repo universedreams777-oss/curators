@@ -8,7 +8,6 @@ import traceback
 API_TOKEN = '8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
 CHANNEL_ID = -1002704063181  # ID канала (без кавычек)
 
-# --- ИСПРАВЛЕНО: добавлены запятые и корректный порядок назначения ---
 curators = [
     "@Olga_Lukashina_Vocal",
     "@vscpnoy",
@@ -55,9 +54,21 @@ def handle_message(message):
     with open("processed.txt", "a", encoding="utf-8") as f:
         f.write(text + "\n")
 
-    # --- ЧЁТКИЙ ЦИКЛ ПО КУРАТОРАМ ---
+    # --- ЧЁТКИЙ ЦИКЛ ПО КУРАТОРАМ С СОХРАНЕНИЕМ ---
+    if os.path.exists("last_index.txt"):
+        with open("last_index.txt", "r") as idx_file:
+            try:
+                last_index = int(idx_file.read().strip())
+            except:
+                last_index = -1
+
+    # Назначаем следующего куратора по кругу
     last_index = (last_index + 1) % len(curators)
     curator = curators[last_index]
+
+    # Сохраняем текущий индекс
+    with open("last_index.txt", "w") as idx_file:
+        idx_file.write(str(last_index))
 
     # Извлечение данных
     name_match = re.search(r"Пользователь\s+(.+)", text)
