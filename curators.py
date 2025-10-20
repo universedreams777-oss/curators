@@ -1,13 +1,15 @@
 import telebot
 import re
 import os
+import time
+import traceback
 
 # === НАСТРОЙКИ ===
 API_TOKEN = '8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
 CHANNEL_ID = -1002704063181  # ID канала (без кавычек)
 
 curators = [
-    "@Olga_Lukashina_Vocal"
+    "@Olga_Lukashina_Vocal",
     "@vscpnoy",
     "@neurogury",
     "@Good_zee_calligraphy",
@@ -26,8 +28,7 @@ if os.path.exists("processed.txt"):
 # === СОЗДАНИЕ БОТА ===
 bot = telebot.TeleBot(API_TOKEN)
 
-
-# === УДАЛЕНИЕ СООБЩЕНИЙ С "прошло 20 часов" ===
+# === УДАЛЕНИЕ СООБЩЕНИЙ "прошло 20 часов" ===
 @bot.channel_post_handler(func=lambda m: m.text and m.text.lower().startswith("прошло 20 часов"))
 def delete_old_messages(message):
     try:
@@ -35,7 +36,6 @@ def delete_old_messages(message):
         print(f"🧹 Удалено сообщение: {message.text[:40]}")
     except Exception as e:
         print(f"❌ Ошибка при удалении: {e}")
-
 
 # === ОБРАБОТЧИК СООБЩЕНИЙ "Наталия" ===
 @bot.channel_post_handler(func=lambda message: message.text and message.text.lower().startswith("наталия"))
@@ -76,18 +76,17 @@ def handle_message(message):
     bot.send_message(CHANNEL_ID, final_text, parse_mode="Markdown")
     print(f"✅ Отправлено куратору {curator}: {student_name}")
 
+# === ВЕЧНЫЙ ФЕНИКС-ПЕРЕЗАПУСК ===
+def run_bot_forever():
+    while True:
+        try:
+            print("🔥 Бот запущен и готов служить Вселенной...")
+            bot.polling(none_stop=True, timeout=60, long_polling_timeout=30)
+        except Exception as e:
+            print("⚠️ Ошибка, но Феникс возродится через 5 секунд!")
+            print(traceback.format_exc())
+            time.sleep(5)
+            continue
 
-# === ЗАПУСК ===
-print("Бот запущен...")
-# === ЗАПУСК ===
-import time
-
-while True:
-    try:
-        print("Бот запущен...")
-        bot.polling(none_stop=True, timeout=60, long_polling_timeout=30)
-    except Exception as e:
-        print(f"⚠️ Ошибка: {e}")
-        time.sleep(5)
-
-
+if __name__ == "__main__":
+    run_bot_forever()
