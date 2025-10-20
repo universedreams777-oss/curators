@@ -8,6 +8,7 @@ import traceback
 API_TOKEN = '8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
 CHANNEL_ID = -1002704063181  # ID канала (без кавычек)
 
+# --- ИСПРАВЛЕНО: добавлены запятые и корректный порядок назначения ---
 curators = [
     "@Olga_Lukashina_Vocal",
     "@vscpnoy",
@@ -54,7 +55,7 @@ def handle_message(message):
     with open("processed.txt", "a", encoding="utf-8") as f:
         f.write(text + "\n")
 
-    # Назначение куратора по кругу
+    # --- ЧЁТКИЙ ЦИКЛ ПО КУРАТОРАМ ---
     last_index = (last_index + 1) % len(curators)
     curator = curators[last_index]
 
