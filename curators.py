@@ -7,10 +7,10 @@ API_TOKEN = '8053472683:AAHhlg9q26TXeF2GvmOghUiWL2fXltE3I9U'
 CHANNEL_ID = -1002704063181  # ID канала (без кавычек)
 
 curators = [
+    "@Olga_Lukashina_Vocal"
+    "@vscpnoy",
     "@neurogury",
     "@Good_zee_calligraphy",
-    "@vscpnoy",
-    "@Olga_Lukashina_Vocal"
 ]
 
 # === ВРЕМЕННОЕ СОСТОЯНИЕ ===
@@ -89,4 +89,5 @@ while True:
     except Exception as e:
         print(f"⚠️ Ошибка: {e}")
         time.sleep(5)
+
 
